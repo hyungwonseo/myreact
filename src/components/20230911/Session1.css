@@ -1,0 +1,52 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.bigbox1 {
+  text-align: center;
+  color: blue;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.bigbox2 {
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  margin-top: 20px;
+}
+
+.bigbox2 .b1 img {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.bigbox2 .b2 {
+  font-size: 0.7rem;
+  padding: 15px;
+}
+
+.bigbox3 {
+  width: 80%;
+  height: 150px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-top: 50px;
+}
+
+.bigbox3 img {
+  width: 100%;
+}
+
+.bigbox3 p {
+  font-size: 0.5rem;
+  padding: 5px;
+}
