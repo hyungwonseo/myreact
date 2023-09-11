@@ -5,7 +5,7 @@ import { List } from "./components/20230911/List";
 export default function App() {
   return (
     <>
-      <List />
+      <Session1 />
     </>
   );
 }

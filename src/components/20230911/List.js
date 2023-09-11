@@ -11,6 +11,10 @@ const Title = styled.h1`
   color: orange;
 `;
 
+const TitleBlue = styled(Title)`
+  color: blue;
+`;
+
 const Photo = styled.img`
   border-radius: 50%;
 `;
@@ -33,7 +37,7 @@ export function List() {
       <p>리액트 연습 코드</p>
       <ul>
         {products.map((p) => (
-          <li>{p.title}</li>
+          <TitleBlue>{p.title}</TitleBlue>
         ))}
       </ul>
       <Container>

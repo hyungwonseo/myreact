@@ -1,10 +1,50 @@
-import "./Session1.css";
+import styled from "styled-components";
+
+const BigBox1 = styled.div`
+  text-align: center;
+  color: blue;
+  font-size: 2.5rem;
+  font-weight: bold;
+`;
+
+const BigBox2 = styled.div`
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  margin-top: 20px;
+  .b1 img {
+    width: 100%;
+    margin-top: 15px;
+  }
+  .b2 {
+    font-size: 1.5rem;
+    padding: 15px;
+  }
+`;
+
+const BigBox3 = styled.div`
+  width: 80%;
+  height: 150px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-top: 50px;
+  img {
+    width: 100%;
+  }
+  p {
+    font-size: 0.5rem;
+    padding: 5px;
+  }
+`;
 
 export function Session1() {
   return (
     <>
-      <div class="bigbox1">Hello world</div>
-      <div class="bigbox2">
+      <BigBox1>Hello world</BigBox1>
+      <BigBox2>
         <div class="b1">
           <img src="https://picsum.photos/id/35/300/200" alt="image" />
         </div>
@@ -14,8 +54,8 @@ export function Session1() {
           Pellentesque pretium quam vitae nisl lobortis lacinia. Aliquam aliquam
           ligula et arcu ullamcorper imperdiet.
         </div>
-      </div>
-      <div class="bigbox3">
+      </BigBox2>
+      <BigBox3>
         <div class="smallbox1">
           <div>
             <img src="https://picsum.photos/id/17/300/200" alt="image" />
@@ -41,7 +81,7 @@ export function Session1() {
           </div>
           <p>Ut nec neque nec ligula porttitor malesuada.</p>
         </div>
-      </div>
+      </BigBox3>
     </>
   );
 }
