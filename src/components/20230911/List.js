@@ -8,7 +8,7 @@ const Container = styled.div`
 
 const Title = styled.h1`
   font-size: 2.5rem;
-  color: orange;
+  color: ${(props) => (props.isActive ? "orange" : props.fontColor)};
 `;
 
 const TitleBlue = styled(Title)`
@@ -37,11 +37,13 @@ export function List() {
       <p>리액트 연습 코드</p>
       <ul>
         {products.map((p) => (
-          <TitleBlue>{p.title}</TitleBlue>
+          <Title fontColor="blue">{p.title}</Title>
         ))}
       </ul>
       <Container>
-        <Title>{user.name}</Title>
+        <Title fontColor="green" isActive={true}>
+          {user.name}
+        </Title>
         <Photo src={user.imageUrl} />
       </Container>
     </>
