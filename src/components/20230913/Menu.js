@@ -25,6 +25,7 @@ const Link = styled.a`
 `;
 
 export function Menu({ fontSize }) {
+  console.log("Menu called!!");
   return (
     <>
       <Container>
