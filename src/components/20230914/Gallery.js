@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styled from "styled-components";
 
 export const sculptureList = [
   {
@@ -99,6 +100,83 @@ export const sculptureList = [
   },
 ];
 
+const Container = styled.div`
+  width: 70vw;
+  margin: 0 auto;
+  padding: 0 20px;
+  background-color: #eee;
+  color: grey;
+`;
+const Title = styled.div`
+  color: dodgerblue;
+`;
+const Box = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 30px;
+`;
+const Img = styled.div`
+  width: 100%;
+  text-align: center;
+  img {
+    width: 100%;
+  }
+`;
+const Right = styled.div`
+  padding: 0 10px;
+`;
+const Content = styled.p`
+  margin: 10px 0;
+`;
+
 export function Gallery() {
-  return <></>;
+  const [index, setIndex] = useState(0);
+  const [detailON, setDetailOn] = useState(false);
+  const target = sculptureList[index];
+  function onPrev() {
+    if (index > 0) {
+      setIndex(index - 1);
+    } else {
+      setIndex(sculptureList.length - 1);
+    }
+  }
+  function onNext() {
+    if (index < sculptureList.length - 1) {
+      setIndex(index + 1);
+    } else {
+      setIndex(0);
+    }
+  }
+  function onClick() {
+    setDetailOn(!detailON);
+  }
+  return (
+    <>
+      <Container>
+        <h2>
+          <Title>{target.name}</Title>
+          by {target.artist}
+        </h2>
+        <h4>
+          {index + 1} of {sculptureList.length}
+          <button style={{ marginLeft: "20px" }} onClick={onPrev}>
+            Prev
+          </button>
+          <button style={{ marginLeft: "20px" }} onClick={onNext}>
+            Next
+          </button>
+        </h4>
+        <Box>
+          <Img>
+            <img src={target.url} alt={target.alt} />
+          </Img>
+          <Right>
+            <button onClick={onClick}>Detail</button>
+            {detailON ? <Content>{target.description}</Content> : null}
+          </Right>
+        </Box>
+      </Container>
+    </>
+  );
 }

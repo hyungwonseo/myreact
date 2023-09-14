@@ -6,6 +6,7 @@ import { PropsTest } from "./components/20230912/PropsTest";
 import { CounterState } from "./components/20230912/CounterState";
 import { Home } from "./components/20230913/Home";
 import { createGlobalStyle } from "styled-components";
+import { Gallery } from "./components/20230914/Gallery";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -26,7 +27,7 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      <Home />
+      <Gallery />
     </>
   );
 }
