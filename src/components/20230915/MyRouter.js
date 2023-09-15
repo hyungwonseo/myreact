@@ -6,6 +6,7 @@ import { Contact } from "./Contact";
 import { About } from "./About";
 import { Error } from "./Error";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Modal } from "./Modal";
 
 const Container = styled.div`
   width: 80%;
@@ -32,6 +33,7 @@ export function MyRouter() {
               <Route path="/about" element={<About />}></Route>
               <Route path="*" element={<Error />}></Route>
             </Routes>
+            <Modal />
           </Content>
         </Container>
       </BrowserRouter>
