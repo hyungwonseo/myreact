@@ -45,8 +45,10 @@ const Info = styled.div`
   margin-top: 30px;
 `;
 
-export function OpenWeather() {
+export function OpenWeather({ cityName }) {
   const API_KEY = "0f9dadad923c3b8044765233ab93226e";
+  const API_KEY_NINJA = "uvS/Vd5ZkGdHe8VMWc6Bmw==ZAOqpKgaLOPieexT";
+
   const [icon, setIcon] = useState(null);
   const [temp, setTemp] = useState(0);
   const [city, setCity] = useState("");
@@ -58,8 +60,34 @@ export function OpenWeather() {
   // 2번째 파라미터에 배열형식으로 의존하는 state를 결정할 수 있음
   // 빈 배열([])을 사용하면 최초 로딩시 딱 한번만 실행됨
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(geoOK, geoError);
-    console.log("useEffect");
+    if (cityName) {
+      // 닌자한테 해당 도시의 위도,경도를 요청
+      const urlToNinja = `https://api.api-ninjas.com/v1/city?name=${cityName}`;
+      fetch(urlToNinja, {
+        headers: {
+          "X-Api-Key": API_KEY_NINJA,
+        },
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          const position = {
+            coords: {
+              latitude: data[0].latitude,
+              longitude: data[0].longitude,
+            },
+          };
+          geoOK(position);
+        })
+        .catch((error) => {
+          geoError(error);
+        });
+    } else {
+      // 특정도시 이름을 입력하지 않았으므로 그냥 현재 위치를 요청
+      navigator.geolocation.getCurrentPosition(geoOK, geoError);
+    }
   }, []);
 
   function geoOK(position) {

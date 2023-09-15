@@ -28,7 +28,7 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      <OpenWeather />
+      <OpenWeather cityName="san francisco" />
     </>
   );
 }
