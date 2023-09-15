@@ -5,6 +5,7 @@ import { Home } from "./Home";
 import { Contact } from "./Contact";
 import { About } from "./About";
 import { Error } from "./Error";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const Container = styled.div`
   width: 80%;
@@ -19,10 +20,21 @@ export function MyRouter() {
   const [page, setPage] = useState(Home);
   return (
     <>
-      <Container>
-        <Navbar setPage={setPage} />
-        <Content>{page}</Content>
-      </Container>
+      <BrowserRouter>
+        <Container>
+          <Navbar setPage={setPage} />
+          <Content>
+            <Routes>
+              {/* path는 주소창의 url을 말함 */}
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/home" element={<Home />}></Route>
+              <Route path="/contact" element={<Contact />}></Route>
+              <Route path="/about" element={<About />}></Route>
+              <Route path="*" element={<Error />}></Route>
+            </Routes>
+          </Content>
+        </Container>
+      </BrowserRouter>
     </>
   );
 }
