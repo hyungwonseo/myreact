@@ -8,6 +8,8 @@ import { Home } from "./components/20230913/Home";
 import { createGlobalStyle } from "styled-components";
 import { Gallery } from "./components/20230914/Gallery";
 import { OpenWeather } from "./components/20230914/OpenWeather";
+import { MyRef } from "./components/20230915/MyRef";
+import { MyRouter } from "./components/20230915/MyRouter";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -28,7 +30,7 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      <OpenWeather cityName="san francisco" />
+      <MyRouter />
     </>
   );
 }
