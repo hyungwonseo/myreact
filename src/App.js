@@ -10,6 +10,7 @@ import { Gallery } from "./components/20230914/Gallery";
 import { OpenWeather } from "./components/20230914/OpenWeather";
 import { MyRef } from "./components/20230915/MyRef";
 import { MyRouter } from "./components/20230915/MyRouter";
+import { GameShop } from "./components/20230918/GameShop";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -30,7 +31,7 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      <MyRouter />
+      <GameShop />
     </>
   );
 }
