@@ -33,8 +33,8 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      <GameShop />
-      {/* <SlideBox /> */}
+      {/* <GameShop /> */}
+      <SlideBox />
     </>
   );
 }

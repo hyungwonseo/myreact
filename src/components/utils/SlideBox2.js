@@ -1,14 +1,13 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 const Container = styled.div`
   position: relative;
 `;
 
-const Slide = styled.div`
+const Slide = styled(motion.div)`
   position: absolute;
-  transition: all 0.5s ease;
-  transform: translateX(${(props) => props.translateX}px);
 `;
 
 const Page = styled.div`
@@ -91,7 +90,10 @@ export function SlideBox() {
   return (
     <>
       <Container>
-        <Slide translateX={slideX * window.innerWidth}>
+        <Slide
+          animate={{ x: slideX * window.innerWidth }}
+          transition={{ duration: 0.5, type: "tween" }}
+        >
           {pageList.map((Page, i) => (
             <Page key={i} left={window.innerWidth * i} />
           ))}
