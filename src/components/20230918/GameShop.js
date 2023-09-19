@@ -6,6 +6,7 @@ import { Dashboard } from "./Dashboad";
 import { Login } from "./Login";
 import { Other } from "./Other";
 import { Error } from "./Error";
+import { SingleProduct } from "./SingleProduct";
 
 export function GameShop() {
   return (
@@ -13,11 +14,14 @@ export function GameShop() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<NavBar />}>
-            <Route path="/home" element={<Home />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/cart" element={<Other />} />
+            <Route index element={<Home />} />
+            <Route path="home" element={<Home />} />
+            <Route path="products" element={<Products />}>
+              <Route path=":id" element={<SingleProduct />} />
+            </Route>
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="login" element={<Login />} />
+            <Route path="cart" element={<Other />} />
             <Route path="*" element={<Error />} />
           </Route>
         </Routes>

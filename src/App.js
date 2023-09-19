@@ -11,6 +11,7 @@ import { OpenWeather } from "./components/20230914/OpenWeather";
 import { MyRef } from "./components/20230915/MyRef";
 import { MyRouter } from "./components/20230915/MyRouter";
 import { GameShop } from "./components/20230918/GameShop";
+import { SlideBox } from "./components/utils/SlideBox";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -31,7 +32,7 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      <GameShop />
+      <SlideBox />
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Link, Outlet } from "react-router-dom";
 import { NavItem } from "./NavItem";
 import styled from "styled-components";
 
@@ -10,6 +10,10 @@ const StyledNavLink = styled(NavLink)`
   color: #333;
   padding: 5px;
   background-color: lightblue;
+  &.active {
+    background-color: dodgerblue;
+    color: white;
+  }
 `;
 
 export function NavBar() {
