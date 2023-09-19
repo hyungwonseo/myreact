@@ -1,6 +1,8 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import games from "./db/Data";
 import styled from "styled-components";
+import { useContext } from "react";
+import { GameContext } from "./GameShop";
 
 const Container = styled.div`
   width: 600px;
@@ -23,13 +25,25 @@ const Text = styled.p`
 
 export function Products() {
   const navigate = useNavigate();
+  const { checkList, setCheckList } = useContext(GameContext);
+
   function onClick(id) {
     // 상대경로는 '/'없이 작성함. 현재 주소뒤에 추가됨
     navigate(`${id}`);
     // 절대경로는 '/'로 시작되는 root이하 전체 주소를 적어야 함
     //navigate(`/products/${id}`);
   }
-  function onChange() {}
+  function onChange(e) {
+    const temp = checkList.map((item) => {
+      if (item.id == e.target.id) {
+        return { ...item, checked: e.target.checked };
+      } else {
+        return item;
+      }
+    });
+    console.log(temp);
+    setCheckList(temp);
+  }
   return (
     <>
       <h3>Games List</h3>
@@ -42,7 +56,12 @@ export function Products() {
               <Text>장르 : {game.genre}</Text>
               <Text>가격 : {game.price}</Text>
             </div>
-            <input type="checkbox" id={game.id} onChange={onChange} />
+            <input
+              type="checkbox"
+              id={game.id}
+              onChange={onChange}
+              checked={checkList[i].checked}
+            />
           </Card>
         ))}
       </Container>

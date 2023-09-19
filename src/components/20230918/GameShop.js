@@ -9,11 +9,15 @@ import { Error } from "./Error";
 import { SingleProduct } from "./SingleProduct";
 import { ProductWrapper } from "./ProductWrapper";
 import { createContext, useState } from "react";
+import games from "./db/Data";
 
-const GameContext = createContext();
+export const GameContext = createContext();
+const defaultCheckList = games.map((g) => {
+  return { id: g.id, checked: false };
+});
 
 export function GameShop() {
-  const [checkList, setCheckList] = useState();
+  const [checkList, setCheckList] = useState(defaultCheckList);
   return (
     <>
       <GameContext.Provider value={{ checkList, setCheckList }}>
