@@ -13,6 +13,7 @@ import { MyRouter } from "./components/20230915/MyRouter";
 import { GameShop } from "./components/20230918/GameShop";
 import { SlideBox } from "./components/utils/SlideBox";
 import { UseContext } from "./components/20230919/UseContext";
+import { Frame } from "./components/utils/Frame";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {

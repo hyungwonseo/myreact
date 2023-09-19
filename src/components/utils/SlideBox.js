@@ -8,18 +8,18 @@ const Container = styled.div`
 const Slide = styled.div`
   position: absolute;
   transition: all 0.5s ease;
-  transform: translateX(${(props) => props.translateX}px);
+  transform: translateX(${(props) => props.$translateX}px);
 `;
 
 const Page = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: ${(props) => props.bgcolor};
+  background-color: ${(props) => props.$bgcolor};
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  left: ${(props) => props.left}px;
+  left: ${(props) => props.$left}px;
   top: 0;
 `;
 
@@ -37,7 +37,7 @@ const Btn2 = styled.button`
 function Page1({ left }) {
   return (
     <>
-      <Page bgcolor="lightgreen" left={left}>
+      <Page $bgcolor="lightgreen" $left={left}>
         <h1>Page 1</h1>
       </Page>
     </>
@@ -46,7 +46,7 @@ function Page1({ left }) {
 function Page2({ left }) {
   return (
     <>
-      <Page bgcolor="khaki" left={left}>
+      <Page $bgcolor="khaki" $left={left}>
         <h1>Page 2</h1>
       </Page>
     </>
@@ -55,7 +55,7 @@ function Page2({ left }) {
 function Page3({ left }) {
   return (
     <>
-      <Page bgcolor="lightblue" left={left}>
+      <Page $bgcolor="lightblue" $left={left}>
         <h1>Page 3</h1>
       </Page>
     </>
@@ -64,7 +64,7 @@ function Page3({ left }) {
 function Page4({ left }) {
   return (
     <>
-      <Page bgcolor="teal" left={left}>
+      <Page $bgcolor="teal" $left={left}>
         <h1>Page 4</h1>
       </Page>
     </>
@@ -91,7 +91,7 @@ export function SlideBox() {
   return (
     <>
       <Container>
-        <Slide translateX={slideX * window.innerWidth}>
+        <Slide $translateX={slideX * window.innerWidth}>
           {pageList.map((Page, i) => (
             <Page key={i} left={window.innerWidth * i} />
           ))}
