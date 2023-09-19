@@ -1,19 +1,39 @@
 import { useRef, useState } from "react";
 import styled from "styled-components";
 
+// 슬라이드 한개의 크기를 여기서 세팅함(px)
+// 화면 전체는 window.innerWidth, window.innerHeight를 사용
+const WIDTH = 900;
+const HEIGHT = 600;
+
+// 화면전체. 슬라이드 컨테이너를 화면 가운데 배치
+const Wrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+// 슬라이드 1개를 보여주는 윈도우. 슬라이드 하나의 사이즈를 가짐(액자형식)
 const Container = styled.div`
+  width: ${WIDTH}px;
+  height: ${HEIGHT}px;
+  overflow: hidden;
   position: relative;
 `;
-
+// 이동하는 슬라이드, 여러개의 슬라이드가 연결되어있음
 const Slide = styled.div`
+  width: ${WIDTH}px;
+  height: ${HEIGHT}px;
   position: absolute;
   transition: all 0.5s ease;
   transform: translateX(${(props) => props.$translateX}px);
 `;
-
+// 슬라이드 1개의 스타일링
 const Page = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: ${WIDTH}px;
+  height: ${HEIGHT}px;
   background-color: ${(props) => props.$bgcolor};
   display: flex;
   justify-content: center;
@@ -24,11 +44,15 @@ const Page = styled.div`
 `;
 
 const Btn1 = styled.button`
+  width: 100px;
+  height: 50px;
   position: absolute;
   left: 100px;
   top: 600px;
 `;
 const Btn2 = styled.button`
+  width: 100px;
+  height: 50px;
   position: absolute;
   left: calc(100vw - 150px);
   top: 600px;
@@ -90,15 +114,17 @@ export function SlideBox() {
 
   return (
     <>
-      <Container>
-        <Slide $translateX={slideX * window.innerWidth}>
-          {pageList.map((Page, i) => (
-            <Page key={i} left={window.innerWidth * i} />
-          ))}
-        </Slide>
+      <Wrapper>
+        <Container>
+          <Slide $translateX={slideX * WIDTH}>
+            {pageList.map((Page, i) => (
+              <Page key={i} left={WIDTH * i} />
+            ))}
+          </Slide>
+        </Container>
         <Btn1 onClick={handleLeftBtn}>LEFT</Btn1>
         <Btn2 onClick={handleRightBtn}>RIGHT</Btn2>
-      </Container>
+      </Wrapper>
     </>
   );
 }
