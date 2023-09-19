@@ -12,6 +12,7 @@ import { MyRef } from "./components/20230915/MyRef";
 import { MyRouter } from "./components/20230915/MyRouter";
 import { GameShop } from "./components/20230918/GameShop";
 import { SlideBox } from "./components/utils/SlideBox";
+import { UseContext } from "./components/20230919/UseContext";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -32,7 +33,7 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      <SlideBox />
+      <GameShop />
     </>
   );
 }
