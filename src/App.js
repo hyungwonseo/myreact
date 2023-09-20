@@ -15,6 +15,7 @@ import { SlideBox } from "./components/utils/SlideBox";
 import { UseContext } from "./components/20230919/UseContext";
 import { Frame } from "./components/utils/Frame";
 import { Grid } from "./components/utils/Grid";
+import { MouseEnter } from "./components/utils/MouseEvent";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -35,7 +36,7 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      <Grid />
+      <MouseEnter />
     </>
   );
 }
