@@ -36,8 +36,8 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      {/* <MyRouter /> */}
-      <SlideBox />
+      <MyRouter />
+      {/* <SlideBox /> */}
     </>
   );
 }

@@ -39,16 +39,16 @@ const Text = styled.div`
   }
 `;
 function ModalBox() {
-  const [toggle, setToggle] = useState(false);
+  const [isModal, setIsModal] = useState(false);
   const [modal, setModal] = useState("");
   const [visible, setVisible] = useState("");
   function onClick() {
-    if (toggle) {
-      setToggle(false);
+    if (isModal) {
+      setIsModal(false);
       setModal("");
       setVisible("");
     } else {
-      setToggle(true);
+      setIsModal(true);
       setModal("modal");
       setTimeout(() => {
         setVisible("visible");
@@ -57,10 +57,10 @@ function ModalBox() {
   }
   return (
     <>
-      {toggle ? <Backdrop /> : null}
-      <Box onClick={onClick} className={modal}>
+      {isModal ? <Backdrop onClick={onClick} /> : null}
+      <Box onClick={onClick} className={`box ${modal}`}>
         <Img src="https://picsum.photos/id/127/300/200" />
-        {toggle ? (
+        {isModal ? (
           <>
             <Text className={visible}>
               <h2>사진제목</h2>
