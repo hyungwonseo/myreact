@@ -24,8 +24,6 @@ const Container = styled.div`
 `;
 // 이동하는 슬라이드, 여러개의 슬라이드가 연결되어있음
 const Slide = styled.div`
-  width: ${WIDTH}px;
-  height: ${HEIGHT}px;
   position: absolute;
   transition: all 0.5s ease;
   transform: translateX(${(props) => props.$translateX}px);
@@ -42,21 +40,52 @@ const Page = styled.div`
   left: ${(props) => props.$left}px;
   top: 0;
 `;
-
-const Btn1 = styled.button`
+const Btn = styled.button`
   width: 100px;
   height: 50px;
   position: absolute;
+  top: 600px;
+`;
+const Btn1 = styled(Btn)`
   left: 100px;
-  top: 600px;
 `;
-const Btn2 = styled.button`
-  width: 100px;
-  height: 50px;
-  position: absolute;
-  left: calc(100vw - 150px);
-  top: 600px;
+const Btn2 = styled(Btn)`
+  right: 100px;
 `;
+
+export function SlideBox() {
+  const pageList = [Page1, Page2, Page3, Page4];
+  const [slideX, setSlideX] = useState(0);
+  const page = useRef(0);
+  function handleLeftBtn() {
+    if (page.current > 0) {
+      setSlideX(slideX + 1);
+      page.current = page.current - 1;
+    }
+  }
+  function handleRightBtn() {
+    if (page.current < pageList.length - 1) {
+      setSlideX(slideX - 1);
+      page.current = page.current + 1;
+    }
+  }
+
+  return (
+    <>
+      <Wrapper>
+        <Container>
+          <Slide $translateX={slideX * WIDTH}>
+            {pageList.map((Page, i) => (
+              <Page key={i} left={WIDTH * i} />
+            ))}
+          </Slide>
+        </Container>
+        <Btn1 onClick={handleLeftBtn}>LEFT</Btn1>
+        <Btn2 onClick={handleRightBtn}>RIGHT</Btn2>
+      </Wrapper>
+    </>
+  );
+}
 
 function Page1({ left }) {
   return (
@@ -91,40 +120,6 @@ function Page4({ left }) {
       <Page $bgcolor="teal" $left={left}>
         <h1>Page 4</h1>
       </Page>
-    </>
-  );
-}
-
-export function SlideBox() {
-  const pageList = [Page1, Page2, Page3, Page4];
-  const [slideX, setSlideX] = useState(0);
-  const page = useRef(0);
-  function handleLeftBtn() {
-    if (page.current > 0) {
-      setSlideX(slideX + 1);
-      page.current = page.current - 1;
-    }
-  }
-  function handleRightBtn() {
-    if (page.current < pageList.length - 1) {
-      setSlideX(slideX - 1);
-      page.current = page.current + 1;
-    }
-  }
-
-  return (
-    <>
-      <Wrapper>
-        <Container>
-          <Slide $translateX={slideX * WIDTH}>
-            {pageList.map((Page, i) => (
-              <Page key={i} left={WIDTH * i} />
-            ))}
-          </Slide>
-        </Container>
-        <Btn1 onClick={handleLeftBtn}>LEFT</Btn1>
-        <Btn2 onClick={handleRightBtn}>RIGHT</Btn2>
-      </Wrapper>
     </>
   );
 }
