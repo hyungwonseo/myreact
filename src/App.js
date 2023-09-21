@@ -16,6 +16,7 @@ import { UseContext } from "./components/20230919/UseContext";
 import { Frame } from "./components/utils/Frame";
 import { Grid } from "./components/utils/Grid";
 import { MouseEnter } from "./components/utils/MouseEvent";
+import { Modal } from "./components/utils/Modal";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -36,7 +37,7 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      <MyRouter />
+      <Modal />
       {/* <SlideBox /> */}
     </>
   );
