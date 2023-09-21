@@ -3,17 +3,19 @@ import styled from "styled-components";
 
 const Box = styled.div`
   width: 200px;
-  height: 200px;
+  height: 180px;
   background-color: khaki;
   position: absolute;
-  top: 200px;
+  top: 500px;
   left: 1600px;
-  transform: scale(1);
   transition: all 0.5s ease;
   &.modal {
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(3);
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 650px;
+    padding: 5px;
   }
 `;
 const Backdrop = styled.div`
@@ -24,23 +26,54 @@ const Backdrop = styled.div`
   left: 0;
   background-color: rgba(0, 0, 0, 0.3);
 `;
-
+const Img = styled.img`
+  width: 100%;
+`;
+const Text = styled.div`
+  margin: 10px 0;
+  padding: 0 10px;
+  transition: all 1s linear;
+  opacity: 0;
+  &.visible {
+    opacity: 1;
+  }
+`;
 function ModalBox() {
   const [toggle, setToggle] = useState(false);
-  function onClick(e) {
+  const [modal, setModal] = useState("");
+  const [visible, setVisible] = useState("");
+  function onClick() {
     if (toggle) {
       setToggle(false);
-      e.currentTarget.classList.remove("modal");
+      setModal("");
+      setVisible("");
     } else {
       setToggle(true);
-      e.currentTarget.classList.add("modal");
+      setModal("modal");
+      setTimeout(() => {
+        setVisible("visible");
+      }, 500);
     }
   }
   return (
     <>
       {toggle ? <Backdrop /> : null}
-      <Box onClick={onClick}>
-        <h1>Modal Window</h1>
+      <Box onClick={onClick} className={modal}>
+        <Img src="https://picsum.photos/id/127/300/200" />
+        {toggle ? (
+          <>
+            <Text className={visible}>
+              <h2>사진제목</h2>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+                molestie vitae tortor et ullamcorper. Suspendisse vehicula
+                luctus condimentum. Integer non purus in turpis viverra
+                tincidunt. Nullam blandit, lorem ut blandit eleifend, felis nisi
+                feugiat lacus, finibus consequat lacus diam eu mauris
+              </p>
+            </Text>
+          </>
+        ) : null}
       </Box>
     </>
   );

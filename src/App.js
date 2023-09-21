@@ -36,7 +36,8 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      <MouseEnter />
+      {/* <MyRouter /> */}
+      <SlideBox />
     </>
   );
 }
