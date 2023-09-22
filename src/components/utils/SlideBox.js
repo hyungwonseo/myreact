@@ -57,6 +57,7 @@ export function SlideBox() {
   const pageList = [Page1, Page2, Page3, Page4];
   const [slideX, setSlideX] = useState(0);
   const page = useRef(0);
+
   function handleLeftBtn() {
     if (page.current > 0) {
       setSlideX(slideX + 1);
@@ -69,7 +70,6 @@ export function SlideBox() {
       page.current = page.current + 1;
     }
   }
-
   return (
     <>
       <Wrapper>
