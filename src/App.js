@@ -18,6 +18,7 @@ import { Grid } from "./components/utils/Grid";
 import { MouseEnter } from "./components/utils/MouseEvent";
 import { Modal } from "./components/utils/Modal";
 import { MyMotion1 } from "./components/20230922/MyMotion1";
+import { MyMotion3 } from "./components/20230922/MyMotion3";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -38,7 +39,7 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      <MyMotion1 />
+      <MyMotion3 />
     </>
   );
 }
