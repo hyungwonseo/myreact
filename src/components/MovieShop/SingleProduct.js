@@ -33,6 +33,11 @@ export function SingleProduct() {
   const { data : cast, isLoading : isLoading2 } = useQuery(["movies", `cast=${id}`], 
     ()=>getMovieCastById(id));
 
+  function displayDirector() {
+    const director = cast.crew.find((c)=>c.job === "Director");
+    return director.name;
+  }
+
   function displayCast() {
     let peoples = ""
     if (cast.cast.length > 5) {
@@ -65,6 +70,7 @@ export function SingleProduct() {
           <p>장르 : {detail.genres.map((d)=>d.name + " / ")}</p>
           <p>개봉일 : {detail.release_date}</p>
           <p>상영시간 : {detail.runtime}분</p>
+          <p>감독 : {displayDirector()}</p>
           <p>배우 : {displayCast()}</p>
           {detail.homepage ? <a href={detail.homepage}>{detail.homepage}</a> : null}
           <p>{detail.overview}</p>    
