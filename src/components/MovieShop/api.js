@@ -57,3 +57,8 @@ export function getMovieDetailById(id) {
   return fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options)
     .then(response => response.json());
 }
+
+export function getMovieCastById(id) {
+  return fetch(`https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`, options)
+    .then(response => response.json());
+}
