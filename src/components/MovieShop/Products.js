@@ -30,6 +30,7 @@ const Btn = styled.button`
   color: #555;
   background-color: lightcoral;
   border: 0px blue solid;
+  cursor: pointer;
   &.active {
     color: white;
     background-color: coral;
