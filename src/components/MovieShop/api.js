@@ -62,3 +62,11 @@ export function getMovieCastById(id) {
   return fetch(`https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`, options)
     .then(response => response.json());
 }
+
+export function searchKeywordMovies(keyword) {
+  if (!keyword) {
+    return;
+  }
+  return fetch(`https://api.themoviedb.org/3/search/movie?query=${keyword}`, options)
+    .then((response) => response.json());
+}
