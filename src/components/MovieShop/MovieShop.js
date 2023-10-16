@@ -12,6 +12,7 @@ import { ProtectedRoute } from './ProtectedRoute';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { createContext, useState } from 'react';
 import styled from 'styled-components';
+import { Search } from './Search';
 
 const Container = styled.div`
   width: 100vw;
@@ -46,6 +47,7 @@ export function MovieShop() {
                 </Route>
                 <Route path="login" element={<Login />}></Route>
                 <Route path="cart" element={<Cart />}></Route>
+                <Route path="search" element={<Search />}></Route>
                 <Route path="*" element={<Error />}></Route>
               </Route>
             </Routes></div>
