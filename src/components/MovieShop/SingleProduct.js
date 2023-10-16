@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { getMovieDetailById, getMovieCastById, getBackDropUrl } from './api';
 import { useQuery } from 'react-query';
@@ -32,6 +32,7 @@ export function SingleProduct() {
     ()=>getMovieDetailById(id));
   const { data : cast, isLoading : isLoading2 } = useQuery(["movies", `cast=${id}`], 
     ()=>getMovieCastById(id));
+  const navigate = useNavigate();
 
   function displayDirector() {
     const director = cast.crew.find((c)=>c.job === "Director");
@@ -62,7 +63,8 @@ export function SingleProduct() {
         : <>
         <Header>
           <h1>{detail.title}</h1>
-          <Back><Link to="/products">BACK</Link></Back>
+          {/*<Back><Link to="/products">BACK</Link></Back>*/}
+          <Back><button onClick={()=>navigate(-1)}>BACK</button></Back>
         </Header>
         <Img src={getBackDropUrl(detail.backdrop_path)} ></Img>
         <Content>
