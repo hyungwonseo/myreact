@@ -43,7 +43,7 @@ export function Search() {
   }
   return <>
     <Container>
-      { !isLoading && data.results.map((movie, i)=>(
+      { !isLoading && data && data.results.map((movie, i)=>(
           <Card key={movie.id}>
             <div onClick={(e)=>onClick(movie.id)}>
               <Img src={getBackDropUrl(movie.backdrop_path)} />
