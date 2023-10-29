@@ -10,7 +10,6 @@ import { Gallery } from "./components/20230914/Gallery";
 import { OpenWeather } from "./components/20230914/OpenWeather";
 import { MyRef } from "./components/20230915/MyRef";
 import { MyRouter } from "./components/20230915/MyRouter";
-import { GameShop } from "./components/20230918/GameShop";
 import { SlideBox } from "./components/utils/SlideBox";
 import { UseContext } from "./components/20230919/UseContext";
 import { Frame } from "./components/utils/Frame";
@@ -19,6 +18,7 @@ import { MouseEnter } from "./components/utils/MouseEvent";
 import { Modal } from "./components/utils/Modal";
 import { MyMotion1 } from "./components/20230922/MyMotion1";
 import { MyMotion3 } from "./components/20230922/MyMotion3";
+import { GameShopWrapper } from "./components/GameShopFrontEnd/GameShopWrapper";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -39,7 +39,7 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      <MyMotion3 />
+      <GameShopWrapper />
     </>
   );
 }
