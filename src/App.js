@@ -18,7 +18,7 @@ import { MouseEnter } from "./components/utils/MouseEvent";
 import { Modal } from "./components/utils/Modal";
 import { MyMotion1 } from "./components/20230922/MyMotion1";
 import { MyMotion3 } from "./components/20230922/MyMotion3";
-import { GameShopWrapper } from "./components/GameShopFrontEnd/GameShopWrapper";
+import { GameShop } from "./components/GameShop2/GameShop";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -39,7 +39,7 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      <GameShopWrapper />
+      <GameShop />
     </>
   );
 }
