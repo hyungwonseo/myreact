@@ -11,18 +11,43 @@ import { ProductWrapper } from "./ProductWrapper";
 import { createContext, useState } from "react";
 import games from "./db/Data";
 import { ProtectedRoute } from "./ProtectedRoute";
+import { useQuery } from "react-query";
+import { getAllGames } from "./api";
 
 export const GameContext = createContext();
-const defaultCheckList = games.map((g) => {
-  return { id: g.id, checked: false };
-});
 
 export function GameShop() {
+  const { data: games, isLoading: isGamesLoading } = useQuery(
+    "games",
+    getAllGames
+  );
+  return (
+    <>
+      {!isGamesLoading ? (
+        <GameShopLoader games={games} isGamesLoading={isGamesLoading} />
+      ) : null}
+    </>
+  );
+}
+
+function GameShopLoader({ games, isGamesLoading }) {
+  const defaultCheckList = games.map((g) => {
+    return { id: g.id, checked: false };
+  });
   const [checkList, setCheckList] = useState(defaultCheckList);
   const [user, setUser] = useState({});
   return (
     <>
-      <GameContext.Provider value={{ checkList, setCheckList, user, setUser }}>
+      <GameContext.Provider
+        value={{
+          checkList,
+          setCheckList,
+          user,
+          setUser,
+          games,
+          isGamesLoading,
+        }}
+      >
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<NavBar />}>

@@ -1,7 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import { GameContext } from "./GameShop";
-import games from "./db/Data";
 
 const Container = styled.div`
   position: relative;
@@ -35,7 +34,7 @@ const DeleteBtn = styled.button`
 `;
 
 export function Other() {
-  const { checkList, setCheckList } = useContext(GameContext);
+  const { checkList, setCheckList, games } = useContext(GameContext);
   const [totalPrice, setTotalPrice] = useState(0);
   const newList = games.filter((g, i) => checkList[i].checked);
   function onClick(e) {
@@ -48,6 +47,8 @@ export function Other() {
     });
     setCheckList(temp);
   }
+
+  function onClickBtn() {}
 
   useEffect(() => {
     let price = 0;
@@ -75,6 +76,7 @@ export function Other() {
         ))}
       </Container>
       <h3>총결제금액 : {totalPrice}원</h3>
+      <button onClick={onClickBtn}>결제버튼</button>
     </>
   );
 }

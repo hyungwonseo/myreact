@@ -19,6 +19,7 @@ import { Modal } from "./components/utils/Modal";
 import { MyMotion1 } from "./components/20230922/MyMotion1";
 import { MyMotion3 } from "./components/20230922/MyMotion3";
 import { GameShop } from "./components/GameShop2/GameShop";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -35,11 +36,15 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const client = new QueryClient();
+
 export default function App() {
   return (
     <>
       <GlobalStyle />
-      <GameShop />
+      <QueryClientProvider client={client}>
+        <GameShop />
+      </QueryClientProvider>
     </>
   );
 }

@@ -1,5 +1,4 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import games from "./db/Data";
 import styled from "styled-components";
 import { useContext } from "react";
 import { GameContext } from "./GameShop";
@@ -25,7 +24,8 @@ const Text = styled.p`
 
 export function Products() {
   const navigate = useNavigate();
-  const { checkList, setCheckList } = useContext(GameContext);
+  const { checkList, setCheckList, games, isGamesLoading } =
+    useContext(GameContext);
 
   function onClick(id) {
     // 상대경로는 '/'없이 작성함. 현재 주소뒤에 추가됨
@@ -48,22 +48,26 @@ export function Products() {
     <>
       <h3>Games List</h3>
       <Container>
-        {games.map((game, i) => (
-          <Card key={game.id}>
-            <div onClick={() => onClick(game.id)}>
-              <Img src={game.image} />
-              <Text>타이틀 : {game.title}</Text>
-              <Text>장르 : {game.genre}</Text>
-              <Text>가격 : {game.price}</Text>
-            </div>
-            <input
-              type="checkbox"
-              id={game.id}
-              onChange={onChange}
-              checked={checkList[i].checked}
-            />
-          </Card>
-        ))}
+        {isGamesLoading ? (
+          <h1>로딩중...</h1>
+        ) : (
+          games.map((game, i) => (
+            <Card key={game.id}>
+              <div onClick={() => onClick(game.id)}>
+                <Img src={game.image} />
+                <Text>타이틀 : {game.title}</Text>
+                <Text>장르 : {game.genre}</Text>
+                <Text>가격 : {game.price}</Text>
+              </div>
+              <input
+                type="checkbox"
+                id={game.id}
+                onChange={onChange}
+                checked={checkList[i].checked}
+              />
+            </Card>
+          ))
+        )}
       </Container>
     </>
   );
