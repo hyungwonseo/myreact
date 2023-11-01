@@ -17,8 +17,12 @@ export function purchaseGames(games) {
       quantity: 1,
     };
   });
+  console.log(purchaseList);
   return fetch(`http://localhost:8080/products/purchaselist`, {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(purchaseList),
   }).then((response) => response.json());
 }

@@ -9,7 +9,6 @@ import { Error } from "./Error";
 import { SingleProduct } from "./SingleProduct";
 import { ProductWrapper } from "./ProductWrapper";
 import { createContext, useState } from "react";
-import games from "./db/Data";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { useQuery } from "react-query";
 import { getAllGames } from "./api";
