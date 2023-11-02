@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import { GameContext } from "./GameShop";
+import { Purchase } from "./Purchase";
 
 const Container = styled.div`
   position: relative;
@@ -36,6 +37,8 @@ const DeleteBtn = styled.button`
 export function Other() {
   const { checkList, setCheckList, games } = useContext(GameContext);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [purchasing, setPurchasing] = useState(false);
+
   const newList = games.filter((g, i) => checkList[i].checked);
   function onClick(e) {
     const temp = checkList.map((item) => {
@@ -48,7 +51,9 @@ export function Other() {
     setCheckList(temp);
   }
 
-  function onClickBtn() {}
+  function onClickBtn() {
+    setPurchasing(true);
+  }
 
   useEffect(() => {
     let price = 0;
@@ -60,23 +65,29 @@ export function Other() {
 
   return (
     <>
-      <Container>
-        {newList.map((game) => (
-          <Card key={game.id}>
-            <Img src={game.image} />
-            <div>
-              <Text>타이틀 : {game.title}</Text>
-              <Text>장르 : {game.genre}</Text>
-              <Text>가격 : {game.price}원</Text>
-            </div>
-            <DeleteBtn id={game.id} onClick={onClick}>
-              X
-            </DeleteBtn>
-          </Card>
-        ))}
-      </Container>
-      <h3>총결제금액 : {totalPrice}원</h3>
-      <button onClick={onClickBtn}>결제버튼</button>
+      {!purchasing ? (
+        <>
+          <Container>
+            {newList.map((game) => (
+              <Card key={game.id}>
+                <Img src={game.image} />
+                <div>
+                  <Text>타이틀 : {game.title}</Text>
+                  <Text>장르 : {game.genre}</Text>
+                  <Text>가격 : {game.price}원</Text>
+                </div>
+                <DeleteBtn id={game.id} onClick={onClick}>
+                  X
+                </DeleteBtn>
+              </Card>
+            ))}
+          </Container>
+          <h3>총결제금액 : {totalPrice}원</h3>
+          <button onClick={onClickBtn}>결제버튼</button>
+        </>
+      ) : (
+        <Purchase list={newList} />
+      )}
     </>
   );
 }
