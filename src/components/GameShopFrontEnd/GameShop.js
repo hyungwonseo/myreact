@@ -12,6 +12,8 @@ import { createContext, useState } from "react";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { useQuery } from "react-query";
 import { getAllGames } from "./api";
+import { Register } from "./Register";
+import { Logout } from "./Logout";
 
 export const GameContext = createContext();
 
@@ -57,6 +59,8 @@ function RunGameShop({ games, gamesCheckList }) {
                 }
               ></Route>
               <Route path="login" element={<Login />} />
+              <Route path="logout" element={<Logout />} />
+              <Route path="register" element={<Register />} />
               <Route path="cart" element={<Other />} />
               <Route path="*" element={<Error />} />
             </Route>

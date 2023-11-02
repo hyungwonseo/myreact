@@ -1,11 +1,15 @@
 import { useQuery } from "react-query";
 import { getAllPurchasedGames } from "./api";
+import { useContext } from "react";
+import { GameContext } from "./GameShop";
 
 export function Dashboard() {
   const { data, isLoading } = useQuery("getAllPurchase", getAllPurchasedGames);
+  const { user } = useContext(GameContext);
   return (
     <>
       <h1>Dashboard</h1>
+      <h3>{user.loginId} 의 구매목록</h3>
       {!isLoading
         ? data.map((d, i) => (
             <p key={i}>

@@ -29,3 +29,13 @@ export function getAllPurchasedGames() {
     method: "GET",
   }).then((response) => response.json());
 }
+
+export function signUp(user) {
+  return fetch(`http://localhost:8081/api/member/signup`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  }).then((response) => response.json());
+}

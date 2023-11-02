@@ -1,6 +1,8 @@
-import { NavLink, Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { NavItem } from "./NavItem";
 import styled from "styled-components";
+import { useContext } from "react";
+import { GameContext } from "./GameShop";
 
 const Container = styled.div`
   display: flex;
@@ -17,6 +19,7 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 export function NavBar() {
+  const { user } = useContext(GameContext);
   return (
     <>
       <Container>
@@ -29,9 +32,15 @@ export function NavBar() {
         <StyledNavLink to="/dashboard">
           <NavItem icon="ti ti-user" name="MyPage" />
         </StyledNavLink>
-        <StyledNavLink to="/login">
-          <NavItem icon="ti ti-login" name="Login" />
-        </StyledNavLink>
+        {user.loginId ? (
+          <StyledNavLink to="/logout">
+            <NavItem icon="ti ti-logout" name="Logout" />
+          </StyledNavLink>
+        ) : (
+          <StyledNavLink to="/login">
+            <NavItem icon="ti ti-login" name="Login" />
+          </StyledNavLink>
+        )}
         <StyledNavLink to="/cart">
           <NavItem icon="ti ti-shopping-cart" name="Cart" />
         </StyledNavLink>

@@ -1,7 +1,6 @@
-import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import styled from "styled-components";
-import { GameContext } from "./GameShop";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 300px;
@@ -29,29 +28,48 @@ const Button = styled.button`
 `;
 
 export function Login() {
+  const [loginId, setLoginId] = useState("");
   const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [birthDate, setBirthDate] = useState("");
+  const [gender, setGender] = useState("MAN");
   const [email, setEmail] = useState("");
-  const { user, setUser } = useContext(GameContext);
   const navigate = useNavigate();
+
+  const options = [
+    { value: "MAN", label: "MAN" },
+    { value: "WOMAN", label: "WOMAN" },
+  ];
 
   function onSubmit(e) {
     e.preventDefault();
-    if (!username || !email) {
-      // 이름과 이메일을 작성하지 않은 경우, 마이페이지로 보내지 않음!
-      return;
-    }
-    // 마이페이지로 보냄
-    navigate("/dashboard");
-    // 유저정보를 부모가 관리하도록 setter를 호출함
-    setUser({ name: username, email: email });
+    const userRegister = {
+      loginId: loginId,
+      password: password,
+      name: username,
+      birthDate: birthDate,
+      gender: gender,
+      email: email,
+    };
+    navigate("/register", { state: { userRegister } });
   }
+
   return (
     <>
       <Container>
         <form onSubmit={onSubmit}>
-          <Header>Login</Header>
+          <Header>Register</Header>
           <div>
-            <label>user name</label>
+            <label>Login ID</label>
+            <br />
+            <input
+              id="loginId"
+              value={loginId}
+              onChange={(e) => setLoginId(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>User Name</label>
             <br />
             <input
               id="name"
@@ -60,7 +78,37 @@ export function Login() {
             />
           </div>
           <div>
-            <label>user email</label>
+            <label>Password</label>
+            <br />
+            <input
+              id="password"
+              value={password}
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Birth Date (YYYY-MM-DD)</label>
+            <br />
+            <input
+              id="birthDate"
+              value={birthDate}
+              onChange={(e) => setBirthDate(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Gender (MAN or WOMAN)</label>
+            <br />
+            <select value={gender} onChange={(e) => setGender(e.target.value)}>
+              {options.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label>User Email</label>
             <br />
             <input
               id="email"
