@@ -31,7 +31,19 @@ export function getAllPurchasedGames() {
 }
 
 export function signUp(user) {
+  console.log("signup api called");
   return fetch(`http://localhost:8081/api/member/signup`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  }).then((response) => response.json());
+}
+
+export function login(user) {
+  console.log("login api called");
+  return fetch(`http://localhost:8081/api/member/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

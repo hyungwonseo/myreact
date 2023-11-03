@@ -1,6 +1,9 @@
-import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "react-query";
+import { login } from "./api";
+import { useContext, useEffect, useState } from "react";
+import { GameContext } from "./GameShop";
 
 const Container = styled.div`
   width: 300px;
@@ -29,36 +32,52 @@ const Button = styled.button`
 
 export function Login() {
   const [loginId, setLoginId] = useState("");
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [birthDate, setBirthDate] = useState("");
-  const [gender, setGender] = useState("MAN");
-  const [email, setEmail] = useState("");
+
+  const [userLogin, setUserLogin] = useState(null);
+  const { setUser } = useContext(GameContext);
   const navigate = useNavigate();
 
-  const options = [
-    { value: "MAN", label: "MAN" },
-    { value: "WOMAN", label: "WOMAN" },
-  ];
+  const { data, isLoading, refetch } = useQuery(
+    "login",
+    () => {
+      if (userLogin) {
+        return login(userLogin);
+      }
+    },
+    { retry: 0 }
+  );
+
+  useEffect(() => {
+    if (data && data.resultCode === "SUCCESS") {
+      console.log(data);
+      setUser({ loginId: userLogin.loginId });
+      navigate("/dashboard");
+    } else if (data && data.resultCode === "ERROR") {
+      console.log(data);
+      navigate("/login");
+    }
+  }, [data]);
+
+  useEffect(() => {
+    refetch();
+  }, [userLogin]);
 
   function onSubmit(e) {
+    console.log("submit");
     e.preventDefault();
-    const userRegister = {
+    const user = {
       loginId: loginId,
       password: password,
-      name: username,
-      birthDate: birthDate,
-      gender: gender,
-      email: email,
     };
-    navigate("/register", { state: { userRegister } });
+    setUserLogin(user);
   }
 
   return (
     <>
       <Container>
         <form onSubmit={onSubmit}>
-          <Header>Register</Header>
+          <Header>Login</Header>
           <div>
             <label>Login ID</label>
             <br />
@@ -69,15 +88,6 @@ export function Login() {
             />
           </div>
           <div>
-            <label>User Name</label>
-            <br />
-            <input
-              id="name"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
-          <div>
             <label>Password</label>
             <br />
             <input
@@ -85,35 +95,6 @@ export function Login() {
               value={password}
               type="password"
               onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Birth Date (YYYY-MM-DD)</label>
-            <br />
-            <input
-              id="birthDate"
-              value={birthDate}
-              onChange={(e) => setBirthDate(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Gender (MAN or WOMAN)</label>
-            <br />
-            <select value={gender} onChange={(e) => setGender(e.target.value)}>
-              {options.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label>User Email</label>
-            <br />
-            <input
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <Button type="submit">제출</Button>
