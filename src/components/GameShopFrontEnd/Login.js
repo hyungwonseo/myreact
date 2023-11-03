@@ -58,7 +58,7 @@ export function Login() {
   );
 
   useEffect(() => {
-    if (data && data.resultCode === "SUCCESS") {
+    if (data && data.resultCode === "SUCCESS" && userLogin) {
       console.log(data);
       setUser({ loginId: userLogin.loginId });
       navigate("/dashboard");

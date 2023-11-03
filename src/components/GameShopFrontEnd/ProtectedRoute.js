@@ -4,10 +4,11 @@ import { Navigate } from "react-router-dom";
 
 export function ProtectedRoute({ children }) {
   const { user } = useContext(GameContext);
+  console.log(user);
   //로그인이 되었는지 확인하는 조건 필요!!
-  if (user.loginId) {
-    return children;
-  } else {
-    return <Navigate to="/login" />;
-  }
+  // if (user.loginId) {
+  //   return children;
+  // } else {
+  //   return <Navigate to="/login" />;
+  // }
 }
