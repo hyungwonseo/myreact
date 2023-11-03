@@ -23,12 +23,12 @@ export function SingleProduct() {
   // id를 통해서 DB로부터 게임의 정보를 가져옴
   const game = games.find((g) => g.id === +id);
   // 객체의 destructuring 문법
-  const { title, genre, imgUrl, price, text } = game;
+  const { title, genre, image, price, text } = game;
   return (
     <>
       <h3>{title}</h3>
       <Container>
-        <Img src={imgUrl} />
+        <Img src={image} />
         <Content>
           <p>타이틀 : {title}</p>
           <p>장르 : {genre}</p>

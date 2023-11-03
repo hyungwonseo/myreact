@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import { GameContext } from "./GameShop";
 import { Purchase } from "./Purchase";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   position: relative;
@@ -34,11 +35,11 @@ const DeleteBtn = styled.button`
   cursor: pointer;
 `;
 
-export function Other() {
+export function Cart() {
   const { checkList, setCheckList, games } = useContext(GameContext);
   const [totalPrice, setTotalPrice] = useState(0);
   const [newList, setNewList] = useState([]);
-  const [purchasing, setPurchasing] = useState(false);
+  const navigate = useNavigate();
 
   function onClick(e) {
     const temp = checkList.map((item) => {
@@ -52,11 +53,11 @@ export function Other() {
   }
 
   function onClickBtn() {
-    setPurchasing(true);
     const temp = checkList.map((item) => {
       return { ...item, checked: false };
     });
     setCheckList(temp);
+    navigate("/purchase", { state: { newList } });
   }
 
   useEffect(() => {
@@ -73,29 +74,23 @@ export function Other() {
 
   return (
     <>
-      {!purchasing ? (
-        <>
-          <Container>
-            {newList.map((game) => (
-              <Card key={game.id}>
-                <Img src={game.imgUrl} />
-                <div>
-                  <Text>타이틀 : {game.title}</Text>
-                  <Text>장르 : {game.genre}</Text>
-                  <Text>가격 : {game.price}원</Text>
-                </div>
-                <DeleteBtn id={game.id} onClick={onClick}>
-                  X
-                </DeleteBtn>
-              </Card>
-            ))}
-          </Container>
-          <h3>총결제금액 : {totalPrice}원</h3>
-          <button onClick={onClickBtn}>결제버튼</button>
-        </>
-      ) : (
-        <Purchase purchasedGames={newList} />
-      )}
+      <Container>
+        {newList.map((game) => (
+          <Card key={game.id}>
+            <Img src={game.image} />
+            <div>
+              <Text>타이틀 : {game.title}</Text>
+              <Text>장르 : {game.genre}</Text>
+              <Text>가격 : {game.price}원</Text>
+            </div>
+            <DeleteBtn id={game.id} onClick={onClick}>
+              X
+            </DeleteBtn>
+          </Card>
+        ))}
+      </Container>
+      <h3>총결제금액 : {totalPrice}원</h3>
+      <button onClick={onClickBtn}>결제버튼</button>
     </>
   );
 }

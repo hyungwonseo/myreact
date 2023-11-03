@@ -49,7 +49,7 @@ export function Products() {
         {games.map((game, i) => (
           <Card key={game.id}>
             <div onClick={() => onClick(game.id)}>
-              <Img src={game.imgUrl} />
+              <Img src={game.image} />
               <Text>타이틀 : {game.title}</Text>
               <Text>장르 : {game.genre}</Text>
               <Text>가격 : {game.price}</Text>

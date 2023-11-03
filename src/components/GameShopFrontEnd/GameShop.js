@@ -1,10 +1,11 @@
+import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { NavBar } from "./NavBar";
 import { Home } from "./Home";
 import { Products } from "./Products";
 import { Dashboard } from "./Dashboad";
 import { Login } from "./Login";
-import { Other } from "./Other";
+import { Cart } from "./Cart";
 import { Error } from "./Error";
 import { SingleProduct } from "./SingleProduct";
 import { ProductWrapper } from "./ProductWrapper";
@@ -14,26 +15,30 @@ import { useQuery } from "react-query";
 import { getAllGames } from "./api";
 import { Register } from "./Register";
 import { Logout } from "./Logout";
+import { Purchase } from "./Purchase";
 
+const client = new QueryClient();
 export const GameContext = createContext();
 
 export function GameShop() {
   const { data, isLoading } = useQuery("games", getAllGames);
   return (
     <>
-      {!isLoading && (
-        <RunGameShop
-          games={data}
-          gamesCheckList={data.map((g) => {
-            return { id: g.id, checked: false };
-          })}
-        />
-      )}
+      <QueryClientProvider client={client}>
+        {!isLoading && data && (
+          <GameShopLoader
+            games={data}
+            gamesCheckList={data.map((g) => {
+              return { id: g.id, checked: false };
+            })}
+          />
+        )}
+      </QueryClientProvider>
     </>
   );
 }
 
-function RunGameShop({ games, gamesCheckList }) {
+function GameShopLoader({ games, gamesCheckList }) {
   const [checkList, setCheckList] = useState(gamesCheckList);
   const [user, setUser] = useState({});
   return (
@@ -61,7 +66,8 @@ function RunGameShop({ games, gamesCheckList }) {
               <Route path="login" element={<Login />} />
               <Route path="logout" element={<Logout />} />
               <Route path="register" element={<Register />} />
-              <Route path="cart" element={<Other />} />
+              <Route path="purchase" element={<Purchase />} />
+              <Route path="cart" element={<Cart />} />
               <Route path="*" element={<Error />} />
             </Route>
           </Routes>

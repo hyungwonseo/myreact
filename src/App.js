@@ -18,8 +18,8 @@ import { MouseEnter } from "./components/utils/MouseEvent";
 import { Modal } from "./components/utils/Modal";
 import { MyMotion1 } from "./components/20230922/MyMotion1";
 import { MyMotion3 } from "./components/20230922/MyMotion3";
-import { GameShopWrapper } from "./components/GameShopFrontEnd/GameShopWrapper";
-import { GameShop } from "./components/GameShop2/GameShop";
+import { GameShop } from "./components/GameShopFrontEnd/GameShop";
+// import { GameShop } from "./components/GameShop2/GameShop";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const GlobalStyle = createGlobalStyle`
@@ -44,7 +44,7 @@ export default function App() {
     <>
       <GlobalStyle />
       <QueryClientProvider client={client}>
-        <GameShopWrapper />
+        <GameShop />
       </QueryClientProvider>
     </>
   );

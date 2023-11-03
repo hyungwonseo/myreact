@@ -21,7 +21,7 @@ export function Register() {
   console.log(data);
 
   useEffect(() => {
-    if (data && data.data == null) {
+    if (data && data.resultCode === "SUCCESS") {
       setUser({ loginId: userRegister.loginId });
       navigate("/dashboard");
     }

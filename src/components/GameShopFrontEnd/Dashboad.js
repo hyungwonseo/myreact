@@ -4,8 +4,9 @@ import { useContext } from "react";
 import { GameContext } from "./GameShop";
 
 export function Dashboard() {
-  const { data, isLoading } = useQuery("getAllPurchase", getAllPurchasedGames);
   const { user } = useContext(GameContext);
+  const { data, isLoading } = useQuery("getAllPurchase", getAllPurchasedGames);
+
   return (
     <>
       <h1>Dashboard</h1>
