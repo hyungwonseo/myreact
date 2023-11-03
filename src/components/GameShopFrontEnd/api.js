@@ -15,7 +15,7 @@ export function purchaseGames(games) {
     game: game,
     quantity: 1, // 원하는 구매 수량을 여기에 설정
   }));
-  return fetch(`http://localhost:8080/products/purchases`, {
+  return fetch(`http://localhost:8080/products/purchaselist`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
