@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import { login } from "./api";
 import { useContext, useEffect, useState } from "react";
@@ -28,6 +28,15 @@ const Button = styled.button`
   font-weight: bold;
   color: white;
   border: 1px solid blue;
+`;
+const StyledNavLink = styled(NavLink)`
+  text-decoration: none;
+  color: #333;
+  margin-left: 60px;
+  &.active {
+    background-color: dodgerblue;
+    color: white;
+  }
 `;
 
 export function Login() {
@@ -100,6 +109,7 @@ export function Login() {
           <Button type="submit">제출</Button>
         </form>
       </Container>
+      <StyledNavLink to="/register">가입하기</StyledNavLink>
     </>
   );
 }
