@@ -1,6 +1,5 @@
-import { useQuery } from "react-query";
 import { purchaseGames } from "./api";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 export function Purchase() {

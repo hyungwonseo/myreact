@@ -43,6 +43,7 @@ export function Login() {
   const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
   const [userLogin, setUserLogin] = useState(null);
+  const [loggingIn, setLoggingIn] = useState(false);
   const { loginState, setLoginState } = useContext(GameContext);
   const navigate = useNavigate();
 
@@ -64,7 +65,11 @@ export function Login() {
         JSON.stringify({ id: userLogin.loginId })
       );
       setLoginState({ id: userLogin.loginId });
-      navigate("/dashboard");
+      setLoggingIn(true);
+      setTimeout(() => {
+        navigate("/dashboard");
+        setLoggingIn(false);
+      }, 1000);
     } else if (data && data.resultCode === "ERROR") {
       console.log(data);
       navigate("/login");
@@ -86,7 +91,9 @@ export function Login() {
 
   return (
     <>
-      {loginState?.id ? (
+      {loggingIn ? (
+        <h1>로그인중입니다...</h1>
+      ) : loginState?.id ? (
         <h1>이미 로그인되어 있습니다. {loginState.id}</h1>
       ) : (
         <>

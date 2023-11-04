@@ -44,6 +44,7 @@ export function Register() {
   const [email, setEmail] = useState("");
 
   const [userRegister, setUserRegister] = useState(null);
+  const [registering, setRegistering] = useState(false);
   const { loginState, setLoginState } = useContext(GameContext);
   const navigate = useNavigate();
 
@@ -61,7 +62,11 @@ export function Register() {
         JSON.stringify({ id: userRegister.loginId })
       );
       setLoginState({ id: userRegister.loginId });
-      navigate("/dashboard");
+      setRegistering(true);
+      setTimeout(() => {
+        navigate("/dashboard");
+        setRegistering(false);
+      }, 1000);
     } else if (data && data.resultCode === "ERROR") {
       console.log(data);
       navigate("/login");
@@ -87,7 +92,9 @@ export function Register() {
 
   return (
     <>
-      {loginState?.id ? (
+      {registering ? (
+        <h1>로그인중입니다...</h1>
+      ) : loginState?.id ? (
         <>
           <h1>이미 로그인되어 있습니다. ({loginState.id})</h1>
           <h1>먼저 로그아웃하신 후에 가입해주세요</h1>
