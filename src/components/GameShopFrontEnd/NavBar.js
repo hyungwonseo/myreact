@@ -19,7 +19,8 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 export function NavBar() {
-  const { user } = useContext(GameContext);
+  const { loginState } = useContext(GameContext);
+
   return (
     <>
       <Container>
@@ -32,9 +33,9 @@ export function NavBar() {
         <StyledNavLink to="/dashboard">
           <NavItem icon="ti ti-user" name="MyPage" />
         </StyledNavLink>
-        {user.loginId ? (
+        {loginState?.id ? (
           <StyledNavLink to="/logout">
-            <NavItem icon="ti ti-logout" name="Logout" />
+            <NavItem icon="ti ti-logout" name="logout" />
           </StyledNavLink>
         ) : (
           <StyledNavLink to="/login">

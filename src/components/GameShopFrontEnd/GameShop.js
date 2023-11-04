@@ -40,11 +40,13 @@ export function GameShop() {
 
 function GameShopLoader({ games, gamesCheckList }) {
   const [checkList, setCheckList] = useState(gamesCheckList);
-  const [user, setUser] = useState({});
+  const [loginState, setLoginState] = useState(
+    JSON.parse(localStorage.getItem("loginState"))
+  );
   return (
     <>
       <GameContext.Provider
-        value={{ checkList, setCheckList, user, setUser, games }}
+        value={{ checkList, setCheckList, loginState, setLoginState, games }}
       >
         <BrowserRouter>
           <Routes>

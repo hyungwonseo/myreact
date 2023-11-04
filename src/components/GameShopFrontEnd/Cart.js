@@ -1,7 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import { GameContext } from "./GameShop";
-import { Purchase } from "./Purchase";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`

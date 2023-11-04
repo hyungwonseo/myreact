@@ -44,7 +44,7 @@ export function Register() {
   const [email, setEmail] = useState("");
 
   const [userRegister, setUserRegister] = useState(null);
-  const { setUser } = useContext(GameContext);
+  const { loginState, setLoginState } = useContext(GameContext);
   const navigate = useNavigate();
 
   const { data, isLoading, refetch } = useQuery("register", () => {
@@ -54,9 +54,13 @@ export function Register() {
   });
 
   useEffect(() => {
-    if (data && data.resultCode === "SUCCESS") {
+    if (data && data.resultCode === "SUCCESS" && userRegister) {
       console.log(data);
-      setUser({ loginId: userRegister.loginId });
+      localStorage.setItem(
+        "loginState",
+        JSON.stringify({ id: userRegister.loginId })
+      );
+      setLoginState({ id: userRegister.loginId });
       navigate("/dashboard");
     } else if (data && data.resultCode === "ERROR") {
       console.log(data);
@@ -69,7 +73,6 @@ export function Register() {
   }, [userRegister]);
 
   function onSubmit(e) {
-    console.log("submit");
     e.preventDefault();
     const user = {
       loginId: loginId,
@@ -84,69 +87,79 @@ export function Register() {
 
   return (
     <>
-      <Container>
-        <form onSubmit={onSubmit}>
-          <Header>Register</Header>
-          <div>
-            <label>Login ID</label>
-            <br />
-            <input
-              id="loginId"
-              value={loginId}
-              onChange={(e) => setLoginId(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>User Name</label>
-            <br />
-            <input
-              id="name"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Password</label>
-            <br />
-            <input
-              id="password"
-              value={password}
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Birth Date (YYYY-MM-DD)</label>
-            <br />
-            <input
-              id="birthDate"
-              value={birthDate}
-              onChange={(e) => setBirthDate(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Gender (MAN or WOMAN)</label>
-            <br />
-            <select value={gender} onChange={(e) => setGender(e.target.value)}>
-              {options.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label>User Email</label>
-            <br />
-            <input
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <Button type="submit">제출</Button>
-        </form>
-      </Container>
+      {loginState?.id ? (
+        <>
+          <h1>이미 로그인되어 있습니다. ({loginState.id})</h1>
+          <h1>먼저 로그아웃하신 후에 가입해주세요</h1>
+        </>
+      ) : (
+        <Container>
+          <form onSubmit={onSubmit}>
+            <Header>Register</Header>
+            <div>
+              <label>Login ID</label>
+              <br />
+              <input
+                id="loginId"
+                value={loginId}
+                onChange={(e) => setLoginId(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>User Name</label>
+              <br />
+              <input
+                id="name"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>Password</label>
+              <br />
+              <input
+                id="password"
+                value={password}
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>Birth Date (YYYY-MM-DD)</label>
+              <br />
+              <input
+                id="birthDate"
+                value={birthDate}
+                onChange={(e) => setBirthDate(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>Gender (MAN or WOMAN)</label>
+              <br />
+              <select
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+              >
+                {options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label>User Email</label>
+              <br />
+              <input
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <Button type="submit">제출</Button>
+          </form>
+        </Container>
+      )}
     </>
   );
 }

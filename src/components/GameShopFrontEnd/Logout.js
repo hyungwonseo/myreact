@@ -1,16 +1,16 @@
+import { useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { GameContext } from "./GameShop";
-import { Navigate } from "react-router-dom";
 
 export function Logout() {
-  const { setUser } = useContext(GameContext);
+  const { setLoginState } = useContext(GameContext);
+  const navigate = useNavigate();
+
   useEffect(() => {
-    setUser({ loginId: null });
+    localStorage.setItem("loginState", JSON.stringify({ id: null }));
+    setLoginState({ id: null });
+    navigate("/");
   }, []);
 
-  return (
-    <>
-      <Navigate to="/" />
-    </>
-  );
+  return <></>;
 }
