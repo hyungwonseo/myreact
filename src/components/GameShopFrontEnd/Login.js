@@ -51,6 +51,7 @@ export function Login() {
     "login",
     () => {
       if (userLogin) {
+        setLoggingIn(true);
         return login(userLogin);
       }
     },
@@ -65,7 +66,6 @@ export function Login() {
         JSON.stringify({ id: userLogin.loginId })
       );
       setLoginState({ id: userLogin.loginId });
-      setLoggingIn(true);
       setTimeout(() => {
         navigate("/dashboard");
         setLoggingIn(false);

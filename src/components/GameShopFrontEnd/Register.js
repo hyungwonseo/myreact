@@ -45,11 +45,13 @@ export function Register() {
 
   const [userRegister, setUserRegister] = useState(null);
   const [registering, setRegistering] = useState(false);
+  const [registerComplete, setRegisteringComplete] = useState(false);
   const { loginState, setLoginState } = useContext(GameContext);
   const navigate = useNavigate();
 
   const { data, isLoading, refetch } = useQuery("register", () => {
     if (userRegister) {
+      setRegistering(true);
       return signUp(userRegister);
     }
   });
@@ -57,16 +59,19 @@ export function Register() {
   useEffect(() => {
     if (data && data.resultCode === "SUCCESS" && userRegister) {
       console.log(data);
+      // 1. 가입완료된 이후 자동로그인 하기
       localStorage.setItem(
         "loginState",
         JSON.stringify({ id: userRegister.loginId })
       );
       setLoginState({ id: userRegister.loginId });
-      setRegistering(true);
       setTimeout(() => {
         navigate("/dashboard");
         setRegistering(false);
       }, 1000);
+      // 2. 가입완료된 이후 다시 로그인하도록 하기
+      // setRegistering(false);
+      // setRegisteringComplete(true);
     } else if (data && data.resultCode === "ERROR") {
       console.log(data);
       navigate("/login");
@@ -94,6 +99,8 @@ export function Register() {
     <>
       {registering ? (
         <h1>로그인중입니다...</h1>
+      ) : registerComplete ? (
+        <h1>가입이 완료되었습니다. 감사합니다.</h1>
       ) : loginState?.id ? (
         <>
           <h1>이미 로그인되어 있습니다. ({loginState.id})</h1>
