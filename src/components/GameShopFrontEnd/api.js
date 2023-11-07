@@ -21,7 +21,9 @@ export function purchaseGames(games) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(purchases),
-  }).then((response) => response.json());
+  })
+    .then((response) => response.json())
+    .catch(() => "ERROR");
 }
 
 export function getAllPurchasedGames() {

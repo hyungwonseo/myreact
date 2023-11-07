@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import { GameContext } from "./GameShop";
-import { useNavigate } from "react-router-dom";
+import { Purchase } from "./Purchase";
 
 const Container = styled.div`
   position: relative;
@@ -38,7 +38,13 @@ export function Cart() {
   const { checkList, setCheckList, games } = useContext(GameContext);
   const [totalPrice, setTotalPrice] = useState(0);
   const [newList, setNewList] = useState([]);
-  const navigate = useNavigate();
+  const [purchasing, setPurchasing] = useState(false);
+  const [purchaseComplete, setPurchaseComplete] = useState(false);
+  const [purchaseFailed, setPurchaseFailed] = useState(false);
+
+  useEffect(() => {
+    setNewList(games.filter((g, i) => checkList[i].checked));
+  }, [checkList, games]);
 
   function onClick(e) {
     const temp = checkList.map((item) => {
@@ -52,44 +58,67 @@ export function Cart() {
   }
 
   function onClickBtn() {
-    const temp = checkList.map((item) => {
-      return { ...item, checked: false };
-    });
-    setCheckList(temp);
-    navigate("/purchase", { state: { newList } });
+    setPurchasing(true);
   }
 
   useEffect(() => {
-    setNewList(games.filter((g, i) => checkList[i].checked));
-  }, [checkList, games]);
-
-  useEffect(() => {
     let price = 0;
-    for (let i = 0; i < newList.length; i++) {
+    for (let i = 0; i < newList?.length; i++) {
       price = price + newList[i].price;
     }
     setTotalPrice(price);
   }, [newList]);
 
+  useEffect(() => {
+    if (purchaseComplete) {
+      const temp = checkList.map((item) => {
+        return { ...item, checked: false };
+      });
+      setCheckList(temp);
+      setPurchaseComplete(false);
+      window.confirm("결제가 완료되었습니다");
+    }
+  }, [purchaseComplete]);
+
+  useEffect(() => {
+    if (purchaseFailed) {
+      window.confirm("구매요청이 실패했습니다");
+      setPurchaseFailed(false);
+    }
+  }, [purchaseFailed]);
+
   return (
     <>
-      <Container>
-        {newList.map((game) => (
-          <Card key={game.id}>
-            <Img src={game.image} />
-            <div>
-              <Text>타이틀 : {game.title}</Text>
-              <Text>장르 : {game.genre}</Text>
-              <Text>가격 : {game.price}원</Text>
-            </div>
-            <DeleteBtn id={game.id} onClick={onClick}>
-              X
-            </DeleteBtn>
-          </Card>
-        ))}
-      </Container>
-      <h3>총결제금액 : {totalPrice}원</h3>
-      <button onClick={onClickBtn}>결제버튼</button>
+      {purchasing ? (
+        <Purchase
+          items={newList}
+          setPurchasing={setPurchasing}
+          setPurchaseComplete={setPurchaseComplete}
+          setPurchaseFailed={setPurchaseFailed}
+        />
+      ) : (
+        <>
+          <Container>
+            {newList?.map((game) => (
+              <Card key={game.id}>
+                <Img src={game.image} />
+                <div>
+                  <Text>타이틀 : {game.title}</Text>
+                  <Text>장르 : {game.genre}</Text>
+                  <Text>가격 : {game.price}원</Text>
+                </div>
+                <DeleteBtn id={game.id} onClick={onClick}>
+                  X
+                </DeleteBtn>
+              </Card>
+            ))}
+          </Container>
+          <h3>총결제금액 : {totalPrice}원</h3>
+          {newList?.length > 0 && (
+            <button onClick={onClickBtn}>결제버튼</button>
+          )}
+        </>
+      )}
     </>
   );
 }
