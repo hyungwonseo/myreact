@@ -5,7 +5,9 @@ import { GameContext } from "./GameShop";
 
 export function Dashboard() {
   const { loginState } = useContext(GameContext);
-  const { data, isLoading } = useQuery("getAllPurchase", getAllPurchasedGames);
+  const { data, isLoading } = useQuery("getAllPurchase", () =>
+    getAllPurchasedGames(loginState?.id)
+  );
 
   return (
     <>

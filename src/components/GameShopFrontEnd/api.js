@@ -10,9 +10,10 @@ export function getGameById(id) {
   }).then((response) => response.json());
 }
 
-export function purchaseGames(games) {
+export function purchaseGames(games, loginId) {
   const purchases = games.map((game) => ({
     game: game,
+    loginId: loginId,
     quantity: 1, // 원하는 구매 수량을 여기에 설정
   }));
   return fetch(`http://localhost:8080/products/purchaselist`, {
@@ -26,8 +27,8 @@ export function purchaseGames(games) {
     .catch(() => "ERROR");
 }
 
-export function getAllPurchasedGames() {
-  return fetch(`http://localhost:8080/products/purchase`, {
+export function getAllPurchasedGames(loginId) {
+  return fetch(`http://localhost:8080/products/purchase/${loginId}`, {
     method: "GET",
   }).then((response) => response.json());
 }
