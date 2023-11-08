@@ -19,8 +19,8 @@ import { Modal } from "./components/utils/Modal";
 import { MyMotion1 } from "./components/20230922/MyMotion1";
 import { MyMotion3 } from "./components/20230922/MyMotion3";
 import { GameShop } from "./components/GameShopFrontEnd/GameShop";
-// import { GameShop } from "./components/GameShop2/GameShop";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { LayoutApp } from "./components/Layout/LayoutApp";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -44,7 +44,8 @@ export default function App() {
     <>
       <GlobalStyle />
       <QueryClientProvider client={client}>
-        <GameShop />
+        {/* <GameShop /> */}
+        <LayoutApp />
       </QueryClientProvider>
     </>
   );
