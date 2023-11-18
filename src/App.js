@@ -21,6 +21,7 @@ import { MyMotion3 } from "./components/20230922/MyMotion3";
 import { GameShop } from "./components/GameShopFrontEnd/GameShop";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { LayoutApp } from "./components/Layout/LayoutApp";
+import { Menu1 } from "./components/utils/Menu1";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -45,7 +46,7 @@ export default function App() {
       <GlobalStyle />
       <QueryClientProvider client={client}>
         {/* <GameShop /> */}
-        <LayoutApp />
+        <Menu1 />
       </QueryClientProvider>
     </>
   );
