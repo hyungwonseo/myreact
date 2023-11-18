@@ -10,7 +10,7 @@ import { Gallery } from "./components/20230914/Gallery";
 import { OpenWeather } from "./components/20230914/OpenWeather";
 import { MyRef } from "./components/20230915/MyRef";
 import { MyRouter } from "./components/20230915/MyRouter";
-import { SlideBox } from "./components/utils/SlideBox";
+import { SlideBox } from "./components/utils/SlideBox3";
 import { UseContext } from "./components/20230919/UseContext";
 import { Frame } from "./components/utils/Frame";
 import { Grid } from "./components/utils/Grid";
@@ -35,6 +35,7 @@ const GlobalStyle = createGlobalStyle`
     padding : 0;
     box-sizing: border-box;
     font-family: Poppins, GmarketSansMedium;
+    user-select: none;
   }
 `;
 
@@ -46,7 +47,7 @@ export default function App() {
       <GlobalStyle />
       <QueryClientProvider client={client}>
         {/* <GameShop /> */}
-        <Menu1 />
+        <SlideBox />
       </QueryClientProvider>
     </>
   );
