@@ -46,8 +46,8 @@ export default function App() {
     <>
       <GlobalStyle />
       <QueryClientProvider client={client}>
-        {/* <GameShop /> */}
-        <SlideBox />
+        <GameShop />
+        {/* <SlideBox /> */}
       </QueryClientProvider>
     </>
   );
