@@ -47,14 +47,8 @@ export default function App() {
     <>
       <GlobalStyle />
       <QueryClientProvider client={client}>
-<<<<<<< Updated upstream
-        {/* <GameShop /> */}
-        {/* <SlideBox /> */}
-        <Test1 />
-=======
         <GameShop />
         {/* <SlideBox /> */}
->>>>>>> Stashed changes
       </QueryClientProvider>
     </>
   );
