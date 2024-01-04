@@ -17,7 +17,7 @@ export function getMoviesNowPlaying() {
     .get(
       "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
       {
-        header: {
+        headers: {
           accept: "application/json",
           Authorization:
             "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NDFmN2JmMDgwOWMxZGFlNTViYzgyMTkzNDcwMTQwMiIsInN1YiI6IjY0Njk2MzUwYTUwNDZlMDBlNWI2NjBkMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mSjmEwZcJ3-dRS1DX6Y_l3bh29btb6B0BHCirvAeumU",
