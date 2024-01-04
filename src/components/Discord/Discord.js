@@ -1,5 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import {
+  apiGetMyInfo,
+  apiLoginByAxios,
+  apiLoginByAxiosPost,
+  apiLoginByFetch,
+} from "./api";
 
 export function Discord() {
   const [loginId, setLoginId] = useState("");
@@ -8,16 +14,7 @@ export function Discord() {
 
   async function onLogin() {
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/authenticate",
-        {
-          username: loginId,
-          password: password,
-        },
-        {
-          "Content-Type": "application/json",
-        }
-      );
+      const response = await apiLoginByAxios(loginId, password);
       if (response.data.resultCode === "SUCCESS") {
         console.log(response.data);
         setToken(response.data.data.token);
@@ -27,12 +24,36 @@ export function Discord() {
     } catch (err) {
       console.log(err.response.data);
     }
+    // try {
+    //   const data = await apiLoginByFetch(loginId, password);
+    //   if (data.resultCode === "SUCCESS") {
+    //     console.log(data);
+    //     setToken(data.data.token);
+    //   } else {
+    //     alert(data.message);
+    //   }
+    // } catch (err) {
+    //   console.log(err.response.data);
+    // }
   }
 
   function onLogout() {
     setToken(null);
     setLoginId("");
     setPassword("");
+  }
+
+  async function onMyInfo() {
+    try {
+      const response = await apiGetMyInfo();
+      if (response.data.resultCode === "SUCCESS") {
+        console.log(response.data.data);
+      } else {
+        alert(response.data.message);
+      }
+    } catch (err) {
+      console.log(err.response.data);
+    }
   }
 
   useEffect(() => {
@@ -48,7 +69,12 @@ export function Discord() {
       {token ? (
         <>
           <h1>Welcome, {loginId}</h1>
-          <button onClick={onLogout}>Logout</button>
+          <p>
+            <button onClick={onLogout}>Logout</button>
+          </p>
+          <p>
+            <button onClick={onMyInfo}>My Info</button>
+          </p>
         </>
       ) : (
         <>
@@ -60,7 +86,9 @@ export function Discord() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button onClick={onLogin}>Login</button>
+          <p>
+            <button onClick={onLogin}>Login</button>
+          </p>
         </>
       )}
     </>

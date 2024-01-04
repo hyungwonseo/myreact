@@ -42,15 +42,15 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const client = new QueryClient();
+// const client = new QueryClient();
 
 export default function App() {
   return (
     <>
       <GlobalStyle />
-      <QueryClientProvider client={client}>
-        <Discord />
-      </QueryClientProvider>
+      {/* <QueryClientProvider client={client}> */}
+      <Discord />
+      {/* </QueryClientProvider> */}
     </>
   );
 }
