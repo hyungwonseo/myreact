@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "react-query";
 import {
   getMoviesNowPlaying,
   getMoviesPopular,
@@ -52,8 +51,6 @@ const categoryList = [
 export function Products() {
   const { catIndex, setCatIndex } = useContext(MovieContext);
   const [data, setData] = useState(null);
-  // const {data, isLoading}
-  //   = useQuery(["movies", categoryList[catIndex].name], categoryList[catIndex].func);
   const navigate = useNavigate();
 
   async function getMovies(i) {

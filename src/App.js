@@ -49,7 +49,7 @@ export default function App() {
     <>
       <GlobalStyle />
       {/* <QueryClientProvider client={client}> */}
-      <Discord />
+      <MovieShop />
       {/* </QueryClientProvider> */}
     </>
   );
